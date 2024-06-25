@@ -15,10 +15,13 @@ clientes = [
     ['9.Andres'],
     ['10.Maria'],
 ]
+
+# Función para asignar saldos aleatorios en dólares
 def asignar_saldos(clientes):
     saldos = {cliente[0]: round(random.uniform(1000, 10000), 2) for cliente in clientes[1:]} 
     return saldos
     
+# Función para clasificar saldos en rangos específicos    
 def clasificar_saldos(saldos):
     rango_bajo, rango_prodemio, rango_alto = [], [], []
     for cliente, saldo in saldos.items():
@@ -29,6 +32,7 @@ def clasificar_saldos(saldos):
         else:
             rango_alto.append((cliente, saldo))
     return rango_bajo, rango_prodemio, rango_alto
+# Función para calcular estadísticas avanzadas    
 def calcular_estadisticas(saldos):
     saldos_lista = list(saldos.values())
     saldo_alto = max(saldos_lista)
@@ -37,6 +41,7 @@ def calcular_estadisticas(saldos):
     media_geo = geometric_mean(saldos_lista)
     return saldo_alto, saldo_bajo, saldo_promedio, media_geo
     
+# Función para generar un reporte de saldos y exportar a CSV    
 def generar_reporte(saldos, impuestos):
     with open('reporte_saldos.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
@@ -46,6 +51,7 @@ def generar_reporte(saldos, impuestos):
             saldo_neto = round(saldo - impuesto, 2)
             writer.writerow([cliente, saldo, impuesto, saldo_neto])
             
+ # Función para mostrar el menú           
 def mostrar_menu():
     print("Menú:")
     print("1. Asignar saldos")
@@ -53,7 +59,8 @@ def mostrar_menu():
     print("3. Ver estadísticas")
     print("4. Generar reporte")
     print("5. Salir")
-    
+
+# Función principal
 def main():
     saldos = {}
     impuestos = {}
